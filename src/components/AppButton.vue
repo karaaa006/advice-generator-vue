@@ -5,12 +5,19 @@ export default {
       type: String,
       required: true,
     },
+    onClick: { type: Function },
+    isDisabled: { type: Boolean },
+  },
+  methods: {
+    click: function () {
+      this.onClick();
+    },
   },
 };
 </script>
 
 <template>
-  <button class="btn">{{ text }}</button>
+  <button class="btn" @click="click" :disabled="isDisabled">{{ text }}</button>
 </template>
 
 <style scoped>
@@ -31,5 +38,15 @@ export default {
 
 .btn:hover {
   box-shadow: 0 0 30px hsl(150deg 100% 66%);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  box-shadow: none;
 }
 </style>
